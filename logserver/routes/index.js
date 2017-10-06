@@ -19,9 +19,11 @@ module.exports = router;
 
 function addItem(req, res) {
   var item = req.body;
+  var timeStamp = Math.floor(Date.now());
   for (var prop in item) {
-    //console.log('adding ' + prop + ' with ' + item[prop]);
-    fs.appendFileSync(prop + '.txt', item[prop] + '\n');
+    var entry = timeStamp + ',' + item[prop] + '\n'
+    console.log('adding ' + entry);
+    fs.appendFileSync('data/' + prop + '.txt', entry);
   }
   res.sendStatus(200);
 }
